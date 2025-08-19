@@ -5,7 +5,10 @@ return {
 		"MunifTanjim/nui.nvim",
 		"nvim-telescope/telescope.nvim",
 	},
-	opts = {},
+	opts = {
+		provider = "copilot",
+		popup_type = "popup",
+	},
 	keys = {
 		{
 			"<leader>wd",
