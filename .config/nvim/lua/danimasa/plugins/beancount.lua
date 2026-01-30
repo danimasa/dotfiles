@@ -11,6 +11,7 @@ return {
 			snippets = {
 				enabled = true,
 			},
+			main_bean_file = "/home/danimasa/Documentos/finance/personal/journal.beancount",
 		})
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = { "beancount" },

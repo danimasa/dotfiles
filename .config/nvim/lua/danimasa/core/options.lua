@@ -50,3 +50,21 @@ opt.conceallevel = 1
 opt.linebreak = true
 opt.wrap = true
 opt.wrapmargin = 0
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+	if args.bang then
+		vim.b.disable_autoformat = true
+	else
+		vim.g.disable_autoformat = true
+	end
+end, {
+	desc = "Disable autoformat-on-save",
+	bang = true,
+})
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+	vim.g.disable_autoformat = false
+	vim.b.disable_autoformat = false
+end, {
+	desc = "Enable autoformat-on-save",
+})
