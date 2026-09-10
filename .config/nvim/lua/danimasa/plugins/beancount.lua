@@ -13,11 +13,6 @@ return {
 			},
 			main_bean_file = "/home/danimasa/Documentos/finance/personal/journal.beancount",
 		})
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = { "beancount" },
-			highlight = { enable = true },
-			incremental_selection = { enable = true },
-			indent = { enable = true },
-		})
+		vim.treesitter.start(0, "beancount")
 	end,
 }

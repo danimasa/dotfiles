@@ -1,49 +1,37 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	event = { "BufReadPre", "BufNewFile" },
-	build = ":TSUpdate",
-	dependencies = {
+	{
 		"windwp/nvim-ts-autotag",
-	},
-	config = function()
-		-- import nvim-treesitter plugin
-		local treesitter = require("nvim-treesitter.configs")
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("nvim-ts-autotag").setup({})
 
-		-- configure treesitter
-		treesitter.setup({ -- enable syntax highlighting
-			highlight = {
-				enable = true,
-			},
-			-- enable indentation
-			indent = { enable = true },
-			-- enable autotagging (w/ nvim-ts-autotag plugin)
-			autotag = {
-				enable = true,
-			},
-			-- ensure these language parsers are installed
-			ensure_installed = {
-				"markdown",
-				"markdown_inline",
-				"bash",
-				"lua",
-				"vim",
-				"dockerfile",
-				"gitignore",
-				"query",
-				"vimdoc",
-				"c",
-				"dart",
-				"latex",
-			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<C-space>",
-					node_incremental = "<C-space>",
-					scope_incremental = false,
-					node_decremental = "<bs>",
-				},
-			},
-		})
-	end,
+			local group = vim.api.nvim_create_augroup("danimasa_treesitter", { clear = true })
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				callback = function(args)
+					pcall(vim.treesitter.start, args.buf)
+				end,
+			})
+
+			vim.keymap.set({ "n", "x" }, "<C-space>", function()
+				if vim.fn.mode() ~= "v" then
+					local node = vim.treesitter.get_node()
+					if not node then
+						return
+					end
+					local sr, sc, er, ec = node:range()
+					vim.fn.setpos("'<", { 0, sr + 1, sc + 1, 0 })
+					vim.fn.setpos("'>", { 0, er + 1, ec, 0 })
+					vim.cmd("normal! gv")
+				else
+					vim.treesitter.select("parent")
+				end
+			end, { desc = "Treesitter: init/incremental selection" })
+
+			vim.keymap.set("x", "<bs>", function()
+				vim.treesitter.select("child")
+			end, { desc = "Treesitter: decremental selection" })
+		end,
+	},
 }
