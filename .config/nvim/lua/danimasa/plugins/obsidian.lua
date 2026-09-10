@@ -1,49 +1,30 @@
 return {
-	"epwalsh/obsidian.nvim",
+	"obsidian-nvim/obsidian.nvim",
 	version = "*",
-	lazy = true,
 	ft = "markdown",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-	},
+	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+	-- event = {
+	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+	--   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
+	--   -- refer to `:h file-pattern` for more examples
+	--   "BufReadPre path/to/my-vault/*.md",
+	--   "BufNewFile path/to/my-vault/*.md",
+	-- },
+	---@module 'obsidian'
+	---@type obsidian.config
 	opts = {
 		workspaces = {
 			{
-				name = "pesquisa",
-				path = "~/OneDrive/8 Notas/Pesquisa",
+				name = "antoniosi",
+				path = "~/OneDrive/OneDrive - Antoniosi Tecnologia Agroindustrial LTDA/Notas",
 			},
 		},
 		daily_notes = {
-			folder = "06 - Diário",
-			date_format = "%Y%m%d",
-			template = "99 - Meta/Templates/Daily.md",
-		},
-		completion = {
-			nvim_cmp = true,
-			min_chars = 2,
-		},
-		templates = {
-			folder = "99 - Meta/Templates",
-		},
-		picker = {
-			name = "telescope.nvim",
+			folder = "Diário",
+			date_format = "%d-%m-%Y",
 		},
 		attachments = {
-			img_folder = "99 - Meta/Anexos",
+			folder = "Anexos",
 		},
-		notes_subdir = "05 - Fugazes",
-		note_id_func = function(title)
-			local suffix = ""
-			if title ~= nil then
-				-- If title is given, transform it into valid file name.
-				suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-			else
-				-- If title is nil, just add 4 random uppercase letters to the suffix
-				for _ = 1, 4 do
-					suffix = suffix .. string.char(math.random(65, 90))
-				end
-			end
-			return tostring(os.time()) .. "-" .. suffix
-		end,
 	},
 }
