@@ -5,7 +5,39 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	config = function()
-		require("codecompanion").setup({})
+		require("codecompanion").setup({
+			interactions = {
+				chat = {
+					adapter = {
+						name = "openrouter",
+						model = "z-ai/glm-5.2",
+					},
+				},
+				inline = {
+					adapter = {
+						name = "openrouter",
+						model = "z-ai/glm-5.2",
+					},
+				},
+				background = {
+					adapter = {
+						name = "openrouter",
+						model = "z-ai/glm-5.3-flash",
+					},
+				},
+				cli = {
+					agent = "opencode",
+					agents = {
+						opencode = {
+							cmd = "opencode",
+							args = {},
+							description = "OpenCode CLI",
+							provider = "terminal",
+						},
+					},
+				},
+			},
+		})
 	end,
 	keys = {
 		{
