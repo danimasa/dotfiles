@@ -33,7 +33,7 @@ return {
 				"vimdoc",
 				"c",
 				"dart",
-				"yaml",
+				"latex",
 			},
 			incremental_selection = {
 				enable = true,

@@ -4,8 +4,7 @@ return {
 	"dart-lang/dart-vim-plugin",
 	"github/copilot.vim",
 	{
-		"crispgm/cmp-beancount",
-		dependencies = { "hrsh7th/nvim-cmp" },
-		ft = { "beancount", "bean" },
+		"sontungexpt/buffer-closer",
+		event = "VeryLazy",
 	},
 }

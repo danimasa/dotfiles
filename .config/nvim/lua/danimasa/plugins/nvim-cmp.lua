@@ -42,7 +42,6 @@ return {
 			}),
 			-- sources for autocompletion
 			sources = cmp.config.sources({
-				{ name = "beancount" },
 				{ name = "nvim_lsp" }, -- snippets
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
