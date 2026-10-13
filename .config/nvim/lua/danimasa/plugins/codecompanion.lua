@@ -9,13 +9,13 @@ return {
 				chat = {
 					adapter = {
 						name = "openrouter",
-						model = "z-ai/glm-5.2",
+						model = "z-ai/glm-5.3",
 					},
 				},
 				inline = {
 					adapter = {
 						name = "openrouter",
-						model = "z-ai/glm-5.2",
+						model = "z-ai/glm-5.3",
 					},
 				},
 				background = {
@@ -34,6 +34,16 @@ return {
 							provider = "terminal",
 						},
 					},
+				},
+			},
+			mcp = {
+				servers = {
+					["codebase-memory-mcp"] = {
+						cmd = { "codebase-memory-mcp" },
+					},
+				},
+				opts = {
+					default_servers = { "codebase-memory-mcp" },
 				},
 			},
 		})
